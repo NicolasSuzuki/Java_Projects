@@ -63,6 +63,22 @@ public class BST {
 			inOrder(root.right);
 			System.out.println(root.data+" ");
 	}
+
+	int height(TreeNode root) {
+	    if (root == null)
+	     return -1;
+	    else {
+	            /* compute the depth of each subtree */
+	    int lDepth = height(root.left);
+	    int rDepth = height(root.right);
+	  
+	            /* use the larger one */
+	    if (lDepth > rDepth)
+	     return (lDepth + 1);
+	    else	 
+	     return (rDepth + 1);
+      }
+	}
 	public void insertIntoTree(int dataToBeInserted) {
 		root = insert(root, dataToBeInserted);
 	}
@@ -80,6 +96,7 @@ public class BST {
 	}
 	public static void main(String[] args) {
 		BST bst = new BST();
+		TreeNode nodeFound;
 		int n, num;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter how many number to be input");
@@ -93,11 +110,14 @@ public class BST {
 		
 		System.out.println("Enter number to be searched");
 		n = scan.nextInt();
-		if(bst.searchIntoTree(n) != null) {
+		nodeFound = bst.searchIntoTree(n);		
+		if(nodeFound != null) {
 			System.out.println("Number found");
+			System.out.println(bst.height(nodeFound));
+			
 		}
 		else {
-			System.out.println("Number found");
+			System.out.println("Number not found");
 		}
 		System.out.println("Inorder traversal of bst");
 		bst.inOrderTraversal();
